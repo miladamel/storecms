@@ -45,7 +45,7 @@ module.exports = class Application {
 
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended : true }));
-        app.use(validator());
+        //app.use(validator());
         app.use(session({  
             ...config.session
         }));
