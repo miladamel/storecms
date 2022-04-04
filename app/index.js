@@ -12,6 +12,7 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const Helpers = require('./helpers');
 const rememberLogin = require('./http/middleware/rememberLogin');
+const config = require('../config');
 
 
 
@@ -25,12 +26,12 @@ module.exports = class Application {
 
     setupExpress() {
         const server = http.createServer(app);
-        server.listen(3000 , () => console.log('Listening on port 3000'));
+        server.listen(process.env.APPLICATION_PORT , () => console.log(`Listening on port ${process.env.APPLICATION_PORT}`));
     }
 
     setMongoConnection() {
         mongoose.Promise = global.Promise;
-        mongoose.connect('mongodb://localhost/nodejscms');
+        mongoose.connect(config.database.url);
     }
 
    
@@ -38,24 +39,20 @@ module.exports = class Application {
      
     setConfig() {
         require('../app/passport/passport-local');
-        app.use(express.static('public'));
-        app.set('view engine', 'ejs');
-        app.set('views' , path.resolve('./resource/views'));
+        app.use(express.static(config.layout.public_dir));
+        app.set('view engine', config.layout.view_engine);
+        app.set('views',config.layout.view_dir);
 
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended : true }));
         app.use(validator());
-        app.use(session({
-            secret : 'mysecretkey',
-            resave : true,
-            saveUninitialized : true,
-            cookie : {expires : new Date(Date.now() + 1000 * 60 * 1)},
-            store : new MongoStore({ mongooseConnection : mongoose.connection })
+        app.use(session({  
+            ...config.session
         }));
-        app.use(cookieParser('mysecretkey'));
+        app.use(cookieParser(process.env.COOKIE_SECRETKEY));
         app.use(flash());
         app.use(passport.initialize());
-        app.use(passport.session());
+        app.use(passport.session({}));
         app.use(rememberLogin.handle);
         app.use((req, res, next) => {
             app.locals = new Helpers(req, res).getObjects();
