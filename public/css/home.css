@@ -1,0 +1,8 @@
+body {
+    font-family: 'Vazir' , Vazir , Tahoma , Arial ,sans-serif !important;
+    font-size: .875rem;
+    font-weight: 300;
+}
+.form-check-label-left {
+    padding-right: 20px;
+}
