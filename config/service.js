@@ -6,5 +6,10 @@ module.exports = {
         options : {
             hl : 'fa'
         }
+    },
+    google : {
+        client_key : process.env.GOOGLE_CLIENTKEY,
+        site_key : process.env.GOOGLE_SITEKEY,
+        callback_url : process.env.GOOGLE_CALLBACKURL
     }
 }

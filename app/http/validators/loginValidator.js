@@ -8,15 +8,12 @@ class loginValidator extends validator {
 
                 check('email')
                 .isEmail()
-                .withMessage('email is not validated'),
+                .withMessage('فیلد ایمیل خالی است'),
 
                 check('password')
                 .not().isEmpty()
-                .withMessage('password cant be empty')
-                .isLength({ min : 8})
-                .withMessage('password cant be less than 5 chars'),
-
-          
+                .withMessage('پسورد خود را وارد کنید')
+   
 
                 
         ]

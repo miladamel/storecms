@@ -5,7 +5,7 @@ const controller = require('./../controller');
 class registerController extends controller {
 
     showRegsitrationForm(req , res) {        
-        res.render('auth/register' , { messages : req.flash('errors'), recaptcha : this.recaptcha.render() });
+        res.render('home/auth/register' , { messages : req.flash('errors'), recaptcha : this.recaptcha.render(), title : 'صفحه عضویت' });
     }
 
     registerProccess(req ,res , next) {

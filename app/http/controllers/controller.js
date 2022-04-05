@@ -20,8 +20,9 @@ module.exports = class controller {
         return new Promise((resolve, reject) => {
             this.recaptcha.verify(req, (err, data) => {
                 if(err) {
+                    console.log(req.originalUrl)
                     req.flash('errors' ,'گزینه امنیتی مربوط به شناسایی ربات خالی است');
-                    res.redirect(req.url);
+                    res.redirect(req.originalUrl);
                 } else {
                     resolve(true);
                 }

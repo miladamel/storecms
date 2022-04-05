@@ -4,7 +4,7 @@ const controller = require('./../controller');
 class loginController extends controller {
     
     showLoginForm(req , res) {
-        res.render('auth/login', {messages : req.flash('errors'), recaptcha : this.recaptcha.render()});
+        res.render('home/auth/login', {messages : req.flash('errors'), recaptcha : this.recaptcha.render(), title : 'صفحه ورود'});
     }
     loginProccess(req, res, next) {
         this.recaptchaValidation(req , res)

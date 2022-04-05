@@ -1,5 +1,5 @@
 const validator = require('./validator');
-const { check, validationResult } = require('express-validator');
+const { check } = require('express-validator');
 
 class registerValidator extends validator {
 
@@ -7,21 +7,21 @@ class registerValidator extends validator {
         return [
             check('name')
                 .not().isEmpty()
-                .withMessage('name cant be empty')
-                .isLength({ min : 5})
-                .withMessage('name cant be less than 5 chars'),
+                .withMessage('فیلد نام نمیتواند خالی بماند')
+                .isLength({ min : 2})
+                .withMessage('نام نمیتواند کمتر از 2 کاراکتر باشد'),
 
                 check('email')
                 .not().isEmpty()
-                .withMessage('Email cant be empty')
+                .withMessage('فیلد ایمیل نمیتواند خالی باشد')
                 .isEmail()
-                .withMessage('email is not validated'),
+                .withMessage('ایمیل معتبر نیست'),
 
                 check('password')
                 .not().isEmpty()
-                .withMessage('password cant be empty')
+                .withMessage('فیلد پسورد نمیتواند خالی باشد')
                 .isLength({ min : 8})
-                .withMessage('password cant be less than 5 chars'),
+                .withMessage('پسورد نمیتواند کمتر از 8 کاراکتر باشد'),
 
           
 

@@ -42,6 +42,10 @@ module.exports = class Application {
         app.use(express.static(config.layout.public_dir));
         app.set('view engine', config.layout.view_engine);
         app.set('views',config.layout.view_dir);
+        app.use(config.layout.ejs.express);
+        app.set("layout extractScripts", config.layout.ejs.extractScripts);
+        app.set("layout extractStyles", config.layout.ejs.extractStyles);
+        app.set('layout', config.layout.ejs.master);
 
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended : true }));
